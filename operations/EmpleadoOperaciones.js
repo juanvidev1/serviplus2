@@ -77,7 +77,7 @@ empleadoOperaciones.actualizarEmpleado = async (req, res) => {
             nombres: body.nombres,
             apellidos: body.apellidos,
             password: body.password,
-            telefono: body.telefono
+            admin: body.admin
         }
         const empleadoActualizado = await empleadoModelo.findByIdAndUpdate(id, obj, { new:true});
         if (empleadoActualizado != null) {
