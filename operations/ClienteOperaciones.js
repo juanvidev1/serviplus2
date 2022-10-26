@@ -39,21 +39,31 @@ clienteOperaciones.crearCliente = async (req, res) => {
 clienteOperaciones.listarClientes = async (req, res) => {
     // Se crea una constante para almacenar el método find aplicado al modelo del cliente (en este caso)     
     try{
-        const listaClientes = await clienteModelo.find();  // Se utiliza el await por lo que la función es asíncrona
-        if(listaClientes.length > 0) {
+        const filtro = req.query; // Esto es para los filtros por query params (los que se concatenan con ?queryParam1=value1&queryParam2). OJO Debe validarse
+        let listaClientes;
+        if (filtro.q != null) {
+            listaClientes = await clienteModelo.find({
+                "$or" : [
+                    {"nombres": { $regex:filtro.q, $options: "i" }}, // regex = expresión regular para que busque internamiente por un parámetro q eue se haya determinado
+                    {"apellidos": { $regex:filtro.q, $options: "i" }},
+                    {"identificacion": { $regex:filtro.q, $options: "i" }},
+                    {"identificacion": { $regex:filtro.q, $options: "i"}}
+                ]
+            });
             res.status(200).send(listaClientes);
         } else {
-            res.status(404).send("No hay datos");
+            listaClientes = await clienteModelo.find(filtro);
         }
     } catch {
-        res.status(400).send("Error en la base de datos");
+        res.status(400).send("Error en la peticion " + error);
     }
 }
 
 // Listar por ID
-clienteOperaciones.listarPorId = async(req, res) => {
+clienteOperaciones.listarPorId = async (req, res) => {
     try {
-        const cliente = await clienteModelo.findOne({ identificacion: req.params.identificacion })
+        const id = req.params.id; // Por buena práctica se llama por el id para el filtrado por parámtero
+        const cliente = await clienteModelo.findById(id);
         if(cliente != null) {
             res.status(200).send(cliente);
         } else {
@@ -66,6 +76,25 @@ clienteOperaciones.listarPorId = async(req, res) => {
 
 // Eliminar
 clienteOperaciones.eliminarCliente = async (req, res) => {
+    try {
+        const id = req.params.id;
+        const body = req.body;
+        const obj = {
+            nombres: body.nombres,
+            apellidos: body.apellidos,
+            password: body.password,
+            telefono: body.telefono,
+            direccion: body.direccion
+        }
+        const clienteActualizado = await clienteModelo.findByIdAndUpdate(id, obj, { new : true });
+        if (clienteActualizado != null) {
+            res.status(200).send(cliente);
+        } else {
+            res.status(404).send("No hay datos");
+        }
+    } catch (error) {
+        res.status(400).send("Petición incorrecta " + error);
+    }
 
 }
 
