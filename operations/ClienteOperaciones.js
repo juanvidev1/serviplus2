@@ -50,9 +50,12 @@ clienteOperaciones.listarClientes = async (req, res) => {
                     {"identificacion": { $regex:filtro.q, $options: "i"}}
                 ]
             });
-            res.status(200).send(listaClientes);
+            
         } else {
             listaClientes = await clienteModelo.find(filtro);
+        }
+        if (listaClientes > 0) {
+            res.status(200).send(listaClientes);
         }
     } catch {
         res.status(400).send("Error en la peticion " + error);
