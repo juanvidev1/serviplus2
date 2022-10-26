@@ -51,3 +51,4 @@ app.get("/", (request, response) => {
 
 });
 app.use("/clientes", require("./rutas/ClienteRutas"));
+app.use("/empleados", require("./rutas/EmpleadoRutas"));

@@ -11,4 +11,4 @@ const employeeSchema = mongoose.Schema({
     admin: {type: Boolean, required: true, unique: false},
 });
 
-module.exports = mongoose.model("UsuarioModel", employeeSchema);
+module.exports = mongoose.model("empleados", employeeSchema);

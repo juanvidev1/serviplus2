@@ -46,6 +46,7 @@ clienteOperaciones.listarClientes = async (req, res) => {
                 "$or" : [
                     {"nombres": { $regex:filtro.q, $options: "i" }}, // regex = expresión regular para que busque internamiente por un parámetro q eue se haya determinado
                     {"apellidos": { $regex:filtro.q, $options: "i" }},
+                    {"username": { $regex:filtro.q, $options: "i" }},
                     {"identificacion": { $regex:filtro.q, $options: "i" }},
                     {"email": { $regex:filtro.q, $options: "i"}}
                 ]
