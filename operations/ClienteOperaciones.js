@@ -80,6 +80,18 @@ clienteOperaciones.listarCliente = async (req, res) => {
 
 // Eliminar
 clienteOperaciones.eliminarCliente = async (req, res) => {
+    try {
+        const id = req.params.id;
+        const cliente = await clienteModelo.findByIdAndDelete(id);
+        if (cliente != null) {
+            req.status(200).send(cliente);
+        } else {
+            req.status(404).send("No hay datos del cliente");
+        }
+    } catch (error) {
+        req.status(400).send("Hubo un error en la petición " + error);
+    }
+}
 
 
 // Actualizar -Put
@@ -105,7 +117,7 @@ clienteOperaciones.actualizarCliente = async (req, res) => {
     }
 
 }
-}
+
 
 module.exports = clienteOperaciones;
 
