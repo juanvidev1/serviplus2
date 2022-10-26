@@ -55,17 +55,54 @@ empleadoOperaciones.listarEmpleados = async (req, res) => {
 
 // Listar UN empleado
 empleadoOperaciones.listarEmpleado = async (req, res) => {
-    
+    try {
+        const id = req.params.id; // Se declara el id como una constante
+        const empleado = await empleadoModelo.findById(id);
+        if (empleado != null) {
+            res.status(200).send(empleado);
+        } else {
+            res.status(404).send("No hay datos del empleado");
+        }
+    } catch (error) {
+        res.status(400).send("Hu un error buscando al empleado " + error);
+    }
 }
 
 // Actualizar empleado
 empleadoOperaciones.actualizarEmpleado = async (req, res) => {
-    
+    try {
+        const id = req.params.id;
+        const body = req.body;
+        const obj = {
+            nombres: body.nombres,
+            apellidos: body.apellidos,
+            password: body.password,
+            telefono: body.telefono
+        }
+        const empleadoActualizado = await empleadoModelo.findByIdAndUpdate(id, obj, { new:true});
+        if (empleadoActualizado != null) {
+            res.status(200).send(empleadoActualizado);
+        } else {
+            res.status(404).send("No existe el empleado")
+        }
+    } catch (error) {
+        res.status(400).send("Hubo un error sctualizando la información del empleado " + error);
+    }
 }
 
 // Eliminar empleado
 empleadoOperaciones.eliminarEmpleado = async (req, res) => {
-    
+    try {
+        const id = req.params.id;
+        const empleado = await empleadoModelo.findByIdAndDelete(id);
+        if (empleado != null) {
+            res.status(200).send(empleado);
+        } else {
+            res.status(404).send("No existe el empleado que desea eliminar")
+        }
+    } catch (error) {
+        res.status(400).send("Hubo un error eliminando al empleado " + error);
+    }
 }
 
 module.exports = empleadoOperaciones;
