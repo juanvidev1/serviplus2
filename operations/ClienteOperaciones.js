@@ -47,15 +47,16 @@ clienteOperaciones.listarClientes = async (req, res) => {
                     {"nombres": { $regex:filtro.q, $options: "i" }}, // regex = expresión regular para que busque internamiente por un parámetro q eue se haya determinado
                     {"apellidos": { $regex:filtro.q, $options: "i" }},
                     {"identificacion": { $regex:filtro.q, $options: "i" }},
-                    {"identificacion": { $regex:filtro.q, $options: "i"}}
+                    {"email": { $regex:filtro.q, $options: "i"}}
                 ]
-            });
-            
+            });  
         } else {
             listaClientes = await clienteModelo.find(filtro);
         }
-        if (listaClientes > 0) {
+        if (listaClientes.length > 0) {
             res.status(200).send(listaClientes);
+        } else {
+            res.status(404).send("No hay datos");
         }
     } catch {
         res.status(400).send("Error en la peticion " + error);
@@ -63,7 +64,7 @@ clienteOperaciones.listarClientes = async (req, res) => {
 }
 
 // Listar por ID
-clienteOperaciones.listarPorId = async (req, res) => {
+clienteOperaciones.listarCliente = async (req, res) => {
     try {
         const id = req.params.id; // Por buena práctica se llama por el id para el filtrado por parámtero
         const cliente = await clienteModelo.findById(id);
@@ -79,6 +80,10 @@ clienteOperaciones.listarPorId = async (req, res) => {
 
 // Eliminar
 clienteOperaciones.eliminarCliente = async (req, res) => {
+
+
+// Actualizar -Put
+clienteOperaciones.actualizarCliente = async (req, res) => {
     try {
         const id = req.params.id;
         const body = req.body;
@@ -100,10 +105,6 @@ clienteOperaciones.eliminarCliente = async (req, res) => {
     }
 
 }
-
-// Actualizar
-clienteOperaciones.actualizarCliente = async (req, res) => {
-    
 }
 
 module.exports = clienteOperaciones;
