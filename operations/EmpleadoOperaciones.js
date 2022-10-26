@@ -6,7 +6,7 @@ const empleadoOperaciones = {}
 // Crear
 empleadoOperaciones.crearEmpleado = async (req, res) => {
     try {
-        const obj = {
+        /*const obj = {
             nombres: "Empleado",
             apellidos: "Prueba VS",
             username: "empleadoprueba1",
@@ -15,8 +15,8 @@ empleadoOperaciones.crearEmpleado = async (req, res) => {
             tipo_identificacion: "Cédula",
             email: "empleadoprueba1@mail.com",
             admin: true
-        }
-        // const obj = req.body;
+        }*/
+        const obj = req.body;
         const empleado = new empleadoModelo(obj);
         const empleadoGuardado = await empleado.save();
         res.status(201).send(empleadoGuardado);
