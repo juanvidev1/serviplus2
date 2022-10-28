@@ -11,6 +11,7 @@ empleadoOperaciones.crearEmpleado = async (req, res) => {
             apellidos: "Prueba VS",
             username: "empleadoprueba1",
             password: "12345",
+            area: "Soporte",
             identificacion: "1234567890",
             tipo_identificacion: "Cédula",
             email: "empleadoprueba1@mail.com",
@@ -37,7 +38,8 @@ empleadoOperaciones.listarEmpleados = async (req, res) => {
                     {"apellidos": { $regex:filtro.q, $options: "i" }},
                     {"username": { $regex:filtro.q, $options: "i" }},
                     {"identificacion": { $regex:filtro.q, $options: "i" }},
-                    {"email": { $regex:filtro.q, $options: "i"}} // Revisar como filtrar por booleano para el caso del admin
+                    {"email": { $regex:filtro.q, $options: "i" }}, // Revisar como filtrar por booleano para el caso del admin
+                    {"area": { $regex:filtro.q, $options: "i" }}
                 ]
             });
         } else {
@@ -77,6 +79,7 @@ empleadoOperaciones.actualizarEmpleado = async (req, res) => {
             nombres: body.nombres,
             apellidos: body.apellidos,
             password: body.password,
+            cargo: body.area,
             admin: body.admin
         }
         const empleadoActualizado = await empleadoModelo.findByIdAndUpdate(id, obj, { new:true});
