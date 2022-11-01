@@ -49,8 +49,48 @@ operacionesTicket.crearTicket = async (req, res) => {
 // Listar tickets
 operacionesTicket.listarTickets = async (req, res) => {
     try {
-        
+        const filtro = req.query;
+        let listaTickets;
+        if (filtro.q != null) {
+            listaTickets = await modeloTicket.find({
+                "$or" : [
+                    {"servicio.nombre": { $regex:filtro.q, $options: "i" }},
+                    {"cliente.username": { $regex:filtro.q, $options: "i" }},
+                    {"cliente.nombres": { $regex:filtro.q, $options: "i" }},
+                    {"cliente.apellidos": { $regex:filtro.q, $options: "i" }},
+                    {"cliente.identificacion": { $regex:filtro.q, $options: "i" }},
+                    {"cliente.email": { $regex:filtro.q, $options: "i" }},
+                    {"asesor.nombres": { $regex:filtro.q, $options: "i" }},
+                    {"asesor.apellidos": { $regex:filtro.q, $options: "i" }},
+                    {"asesor.identificacion": { $regex:filtro.q, $options: "i" }}
+                ]
+            }); 
+        } else {
+            listaTickets = await modeloTicket.find(filtro);
+        }
+        if (listaTickets.length > 0) {
+            res.status(200).send(listaTickets);
+        } else {
+            res.status(404).send(listaTickets);
+        }
     } catch (error) {
-        
+        res.status(400).send("Hubo un error en la petición " + error);
     }
 }
+
+// Encontrar por id
+operacionesTicket.listarTicket = async (req, res) => {
+    try {
+        const id = req.params.id;
+        const tiquete = await modeloTicket.findById(id);
+        if (tiquete != null) {
+            res.status(200).send(tiquete);
+        } else {
+            res.status(404).send("No existe el tiquete");
+        }
+    } catch (error) {
+        res.status(400).send("Ubo un error en la petición " + error);
+    }
+}
+
+module.exports = operacionesTicket;
