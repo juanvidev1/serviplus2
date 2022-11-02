@@ -93,4 +93,45 @@ operacionesTicket.listarTicket = async (req, res) => {
     }
 }
 
+
+// Actualizar ticket
+operacionesTicket.actualizarTicket = async (req, res) => {
+    try {
+        const id = req.params.id;
+        const body = req.body;
+        const obj = {
+            estado_ticket: body.estado_ticket,
+            redirigido: body.redirigido,
+            asesor_redirigido: {
+                username: body.asesor_redirigido.username,
+                area: body.asesor_redirigido.area
+            }
+        }
+        const tiqueteActualizado = await modeloTicket.findByIdAndUpdate(id, obj, {new:true});
+        if (tiqueteActualizado != null) {
+            res.status(200).send(tiqueteActualizado);
+        } else {
+            res.status(404).send("El ticket no existe");
+        }
+    } catch (error) {
+        res.status(400).send("Hubo un error en la petición " + error);
+    }
+}
+
+
+// Eliminar ticket
+operacionesTicket.eliminarTicket = async (req, res) => {
+    try {
+        const id = req.params.id;
+        const tiqueteEliminado = await modeloTicket.findByIdAndDelete(id);
+        if (tiqueteEliminado != null) {
+            res.status(200).send(tiqueteEliminado);
+        } else {
+            res.status(404).send("El tiquete no existe");
+        }
+    } catch (error) {
+        res.status(400).send("Hubo un error en la petición " + error);
+    }
+}
+
 module.exports = operacionesTicket;
