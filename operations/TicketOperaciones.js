@@ -100,6 +100,14 @@ operacionesTicket.actualizarTicket = async (req, res) => {
         const id = req.params.id;
         const body = req.body;
         const obj = {
+            asesor: {
+                nombres: body.asesor.nombres,
+                apellidos: body.asesor.apellidos,
+                username: body.asesor.username,
+                area: body.asesor.area,
+                identificacion: body.asesor.identificacion,
+                email: body.asesor.email
+            },
             estado_ticket: body.estado_ticket,
             redirigido: body.redirigido,
             asesor_redirigido: {

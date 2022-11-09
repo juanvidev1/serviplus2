@@ -105,7 +105,9 @@ clienteOperaciones.actualizarCliente = async (req, res) => {
             apellidos: body.apellidos,
             password: body.password,
             telefono: body.telefono,
-            direccion: body.direccion
+            direccion: body.direccion,
+            departamento: body.departamento,
+            ciudad: body.ciudad
         }
         const clienteActualizado = await clienteModelo.findByIdAndUpdate(id, obj, { new : true });
         if (clienteActualizado != null) {
