@@ -7,7 +7,7 @@ const clientSchema = mongoose.Schema({
     nombres: {type: String, maxLength: 60, required: true, unique: false},
     apellidos: {type: String, maxLength: 60, required: true, unique: false},
     username: {type: String, maxLength: 60, required: true, unique: false},
-    password: {type:String, maxLength: 30, required: true, unique: false},
+    password: {type:String, maxLength: 100, required: true, unique: false},
     identificacion: {type: String, maxLength: 20, required: true, unique: true},
     tipo_identificacion: {type: String, maxLength: 20, required:true, unique: false},
     telefono: {type: Number, required: true, unique: false},

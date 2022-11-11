@@ -1,7 +1,14 @@
 const { json } = require("express");
-const empleadoModelo = require("../models/EmpleadoModel"); 
+const empleadoModelo = require("../models/EmpleadoModel");
+const bcrypt = require('bcrypt'); 
 
 const empleadoOperaciones = {}
+
+const cifrarPassword = async (password) => {
+    const SALT_TIMES = 10;
+    const salt = await bcrypt.genSalt(SALT_TIMES);
+    return await bcrypt.hash(password, salt);
+}
 
 // Crear
 empleadoOperaciones.crearEmpleado = async (req, res) => {
@@ -18,6 +25,7 @@ empleadoOperaciones.crearEmpleado = async (req, res) => {
             admin: true
         }*/
         const obj = req.body;
+        obj.password = await cifrarPassword(obj.password);
         const empleado = new empleadoModelo(obj);
         const empleadoGuardado = await empleado.save();
         res.status(201).send(empleadoGuardado);
@@ -45,11 +53,7 @@ empleadoOperaciones.listarEmpleados = async (req, res) => {
         } else {
             listaEmpleados = await empleadoModelo.find();
         }
-        if (listaEmpleados.length > 0) {
             res.status(200).send(listaEmpleados);
-        } else {
-            res.status(404).send("No hay datos de empleados");
-        }
     } catch (error) {
         res.status(400).send("Hubo un error en la petición " + error);
     }

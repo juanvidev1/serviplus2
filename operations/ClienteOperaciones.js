@@ -1,13 +1,22 @@
 // Se importa el Modelo
 // Con el .. entre el string y antes del / le indico al código que salga de la carpeta actual y entre a otra
 const { json } = require("express");
-const clienteModelo = require("../models/ClienteModel"); 
+const clienteModelo = require("../models/ClienteModel");
+const bcrypt = require("bcrypt");
+
 
 const clienteOperaciones = {}
 
+const cifrarPassword = async (password) => {
+    const SALT_TIMES = 10;
+    const salt = await bcrypt.genSalt(SALT_TIMES);
+    return await bcrypt.hash(password, salt);
+}
 
 // Se pueden crear las operaciones del CRUD como métodos de una constante tipo objeto
 // Todas las funciones son asicnrónicas
+
+
 
 // Crear
 clienteOperaciones.crearCliente = async (req, res) => {
@@ -25,7 +34,7 @@ clienteOperaciones.crearCliente = async (req, res) => {
         }*/
         // Para poder enviar el body desde la petición y no el dummie, se utiliza req.body
         const obj = req.body;
-
+        obj.password = await cifrarPassword(obj.password);
         // Luego se crea un nuevo cliente utilizando el objeto dummie
         const cliente = new clienteModelo(obj);
         const clienteGuardado = await cliente.save();

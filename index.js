@@ -53,3 +53,6 @@ app.get("/", (request, response) => {
 app.use("/clientes", require("./rutas/ClienteRutas"));
 app.use("/empleados", require("./rutas/EmpleadoRutas"));
 app.use("/servicios", require("./rutas/ServicioRutas"));
+app.use("/tickets", require("./rutas/TicketsRutas"));
+app.use("/clientes/login", require("./rutas/ClienteLoginRutas"));
+app.use("/empleados/login", require("./rutas/EmpleadoLoginRutas"));
