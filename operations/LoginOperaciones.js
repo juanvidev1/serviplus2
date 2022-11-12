@@ -21,6 +21,7 @@ LoginOperaciones.clienteLogin = async (req, res) => {
                 const acceso = {
                     id: cliente._id,
                     nombres: cliente.nombres + " " + cliente.apellidos,
+                    username: cliente.username,
                     identificacion: cliente.identificacion,
                     tipo_identificacion: cliente.tipo_identificacion,
                     email: cliente.email,
