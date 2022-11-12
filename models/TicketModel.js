@@ -8,8 +8,7 @@ const ticketSchema = mongoose.Schema({
         comentarios: {type: String, maxLength: 300, required: false, unique: false}
     },
     cliente: {
-        nombres: {type: String, maxLength: 60, required: true, unique: false},
-        apellidos: {type: String, maxLength: 60, required: true, unique: false},
+        nombre: {type: String, maxLength: 60, required: true, unique: false},
         username: {type: String, maxLength: 60, required: true, unique: false},
         identificacion: {type: String, maxLength: 20, required: true, unique: true},
         tipo_identificacion: {type: String, maxLength: 20, required:false, unique: false},
@@ -18,7 +17,6 @@ const ticketSchema = mongoose.Schema({
     },
     asesor: {
         nombres: {type: String, maxLength: 60, required: false, unique: false},
-        apellidos: {type: String, maxLength: 60, required: false, unique: false},
         username: {type: String, maxLength: 60, required: false, unique: false},
         area: {type:String, maxLength: 40, required: false, unique: false},
         identificacion: {type: String, maxLength: 20, required: false, unique: true},

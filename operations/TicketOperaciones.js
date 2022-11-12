@@ -56,8 +56,7 @@ operacionesTicket.listarTickets = async (req, res) => {
                 "$or" : [
                     {"servicio.nombre_servicio": { $regex:filtro.q, $options: "i" }},
                     {"cliente.username": { $regex:filtro.q, $options: "i" }},
-                    {"cliente.nombres": { $regex:filtro.q, $options: "i" }},
-                    {"cliente.apellidos": { $regex:filtro.q, $options: "i" }},
+                    {"cliente.nombre": { $regex:filtro.q, $options: "i" }},
                     {"cliente.identificacion": { $regex:filtro.q, $options: "i" }},
                     {"cliente.email": { $regex:filtro.q, $options: "i" }},
                     {"asesor.nombres": { $regex:filtro.q, $options: "i" }},
@@ -102,8 +101,7 @@ operacionesTicket.actualizarTicket = async (req, res) => {
                 comentarios: body.comentarios
             },
             asesor: {
-                nombres: body.asesor.nombres,
-                apellidos: body.asesor.apellidos,
+                nombre: body.asesor.nombres,
                 username: body.asesor.username,
                 area: body.asesor.area,
                 identificacion: body.asesor.identificacion,
