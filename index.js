@@ -17,7 +17,7 @@ const mongoose = require('./conexion');
 // Configuraciones
 const app = express();
 const env = process.env;
-const port = env.port || 8080;
+const port = env.port || 5000;
 app.use(express.json())  // Esta librería hace que los objetos sean leídos como json. Si no se utiliza, los objetos no serán interpretados como json y el post no se hará bien
 app.use(morgan('dev'));
 app.use(cors());
