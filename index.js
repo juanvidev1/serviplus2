@@ -28,7 +28,7 @@ app.use(cors());
 
 //Arranque
 app.listen(port, () =>{
-    console.log("API iniciado en el puerto " + port);
+    console.log("API iniciado");
 
 });
 
