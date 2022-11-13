@@ -10,8 +10,8 @@ const ticketSchema = mongoose.Schema({
     cliente: {
         nombre: {type: String, maxLength: 60, required: true, unique: false},
         username: {type: String, maxLength: 60, required: true, unique: false},
-        identificacion: {type: String, maxLength: 20, required: true, unique: true},
-        email: {type: String, maxLength: 80, required: true, unique: true}
+        identificacion: {type: String, maxLength: 20, required: true, unique: false},
+        email: {type: String, maxLength: 80, required: true, unique: false}
     },
     asesor: {
         nombres: {type: String, maxLength: 60, required: false, unique: false},
