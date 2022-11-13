@@ -3,8 +3,8 @@ const mongoose = require('mongoose');
 const username = "admin";
 const password = "admin";
 const database = "ServiPlusBD";
-// const URI = "mongodb+srv://"+ username + ":" + password + "@juanvicluster.qrxfpac.mongodb.net/" + database + "?retryWrites=true&w=majority";
-const URI = "mongodb+srv://" + username + ":" + password + "@cluster0.xv4doci.mongodb.net/" + database + "?retryWrites=true&w=majority";
+const URI = "mongodb+srv://"+ username + ":" + password + "@juanvicluster.qrxfpac.mongodb.net/" + database + "?retryWrites=true&w=majority";
+// const URI = "mongodb+srv://" + username + ":" + password + "@cluster0.xv4doci.mongodb.net/" + database + "?retryWrites=true&w=majority";
 
 const conectar = async () => {
     try {

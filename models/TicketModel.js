@@ -2,9 +2,9 @@ const { default: mongoose } = require("mongoose");
 
 const ticketSchema = mongoose.Schema({
     servicio: {
-        nombre_servicio: {type: String, maxLength: 60, required: true, unique: false},
-        descripcion_servicio: {type: String, maxLength: 300, required: true, unique: false},
-        tipo_servicio: {type: String, maxLength: 40, required: false, unique: false},
+        nombre: {type: String, maxLength: 60, required: true, unique: false},
+        descripcion: {type: String, maxLength: 300, required: true, unique: false},
+        tipo: {type: String, maxLength: 40, required: false, unique: false},
         comentarios: {type: String, maxLength: 300, required: false, unique: false}
     },
     cliente: {

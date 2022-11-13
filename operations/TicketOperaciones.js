@@ -97,11 +97,11 @@ operacionesTicket.actualizarTicket = async (req, res) => {
         const body = req.body;
         const obj = {
             servicio: {
-                tipo_servicio: body.tipo_servicio,
-                comentarios: body.comentarios
+                tipo: body.servicio.tipo,
+                comentarios: body.servicio.comentarios
             },
             asesor: {
-                nombre: body.asesor.nombres,
+                nombres: body.asesor.nombres,
                 username: body.asesor.username,
                 area: body.asesor.area,
                 identificacion: body.asesor.identificacion,
