@@ -17,8 +17,8 @@ const ticketSchema = mongoose.Schema({
         nombres: {type: String, maxLength: 60, required: false, unique: false},
         username: {type: String, maxLength: 60, required: false, unique: false},
         area: {type:String, maxLength: 40, required: false, unique: false},
-        identificacion: {type: String, maxLength: 20, required: false, unique: true},
-        email: {type: String, maxLength: 80, required: false, unique: true}
+        identificacion: {type: String, maxLength: 20, required: false, unique: false},
+        email: {type: String, maxLength: 80, required: false, unique: false}
     },
     estado_ticket: {type: String, maxLength: 20, required: true, unique: false},
     redirigido: {type: Boolean, required: false, unique: false},
