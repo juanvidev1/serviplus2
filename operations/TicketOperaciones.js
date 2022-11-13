@@ -60,7 +60,6 @@ operacionesTicket.listarTickets = async (req, res) => {
                     {"cliente.identificacion": { $regex:filtro.q, $options: "i" }},
                     {"cliente.email": { $regex:filtro.q, $options: "i" }},
                     {"asesor.nombres": { $regex:filtro.q, $options: "i" }},
-                    {"asesor.apellidos": { $regex:filtro.q, $options: "i" }},
                     {"asesor.identificacion": { $regex:filtro.q, $options: "i" }},
                     {"estado_ticket": { $regex:filtro.q, $options: "i" }}
                 ]
