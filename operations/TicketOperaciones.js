@@ -54,7 +54,7 @@ operacionesTicket.listarTickets = async (req, res) => {
         if (filtro.q != null) {
             listaTickets = await modeloTicket.find({
                 "$or" : [
-                    {"servicio.nombre_servicio": { $regex:filtro.q, $options: "i" }},
+                    {"servicio.nombre": { $regex:filtro.q, $options: "i" }},
                     {"cliente.username": { $regex:filtro.q, $options: "i" }},
                     {"cliente.nombre": { $regex:filtro.q, $options: "i" }},
                     {"cliente.identificacion": { $regex:filtro.q, $options: "i" }},
