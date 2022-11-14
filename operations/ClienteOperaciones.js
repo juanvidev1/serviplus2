@@ -120,7 +120,7 @@ clienteOperaciones.actualizarCliente = async (req, res) => {
         }
         const clienteActualizado = await clienteModelo.findByIdAndUpdate(id, obj, { new : true });
         if (clienteActualizado != null) {
-            res.status(200).send(cliente);
+            res.status(200).send(clienteActualizado);
         } else {
             res.status(404).send("No hay datos");
         }
