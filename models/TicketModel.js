@@ -1,7 +1,7 @@
 const { default: mongoose } = require("mongoose");
 
 const ticketSchema = mongoose.Schema({
-    fecha: {type: Date},
+    fecha: {type: Date, required: true, unique: false},
     servicio: {
         nombre: {type: String, maxLength: 60, required: true, unique: false},
         descripcion: {type: String, maxLength: 300, required: true, unique: false},
